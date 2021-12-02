@@ -1,4 +1,4 @@
-puzzle = open("Day1Puzzle", "r").read().split("\n")
+puzzle = open("Day1Input", "r").read().split("\n")
 puzzle = [int(i) for i in puzzle[0:-1:]]
 
 #PART 1
