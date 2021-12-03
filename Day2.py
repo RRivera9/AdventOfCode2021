@@ -1,4 +1,5 @@
-puzzle = open("Day2Input", "r").read().split("\n")
+with open("Day2Input") as f:
+    puzzle = f.read().split("\n")
 
 #PART 1
 def part1():

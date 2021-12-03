@@ -1,5 +1,6 @@
-puzzle = open("Day1Input", "r").read().split("\n")
-puzzle = [int(i) for i in puzzle[0:-1:]]
+with open("Day2Input") as f:
+    puzzle = f.read().split("\n")
+    puzzle = [int(i) for i in puzzle[0:-1:]]
 
 #PART 1
 def increasing():
