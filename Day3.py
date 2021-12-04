@@ -53,7 +53,6 @@ def part2():
         if len(leastCommon) != 1:
             leastCommon = list(filter(isIndexSameOmega, leastCommon))
 
-        print(f'{j =} {mostCommon = }  {leastCommon = }')
     return int(mostCommon[0], 2) * int(leastCommon[0], 2)
 
 if __name__ == "__main__":
