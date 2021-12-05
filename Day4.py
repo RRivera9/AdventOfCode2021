@@ -22,13 +22,13 @@ def checkBoard(boardHit):
     return False, ("None", False)
 
 
-#PART 1
+# PART 1
 def part1():
     numbersToCall = list(map(int, puzzle[0].split(",")))
     bingoBoard = {}
     bingoBoardHits = {}
 
-    #Converting puzzle into lists of ints for the board
+    # Converting puzzle into lists of ints for the board
     for i in range(int(len(puzzle[1::]) / 6)):
         bingoBoard[i] = puzzle[2 + i * 6:i * 6 + 7]
         for j in range(5):
