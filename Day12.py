@@ -1,5 +1,3 @@
-from functools import cache
-
 with open("Day12Input") as f:
     puzzle = f.read().split("\n")
 
@@ -22,25 +20,16 @@ def part1():
         currentPath = paths.pop()
         visited = set()
         visited.add("start")
-        ###print(visited)
-        ###print(f'currentpath is {currentPath}')
-        ###print(visited)
-
         for i in currentPath[1:]:
             if i[0].islower():
                 visited.add(i)
-
         for branches in graph[currentPath[-1]]:
-
             if branches not in visited:
-                ###print(f'branches are {branches}, visited is {visited}')
                 newpath = currentPath + [branches]
-                ###print(f'newpath is {newpath}')
                 if branches == "end":
                     finalPaths.append(newpath)
                 else:
                     paths.append(newpath)
-        ### print(f'paths are {paths}')
         count += 1
         if count % 1000000 == 0:
             print(count)
@@ -59,9 +48,6 @@ def part2():
         visited = set()
         visited.add("start")
         repeat = False
-        ### print(visited)
-        ### print(f'currentpath is {currentPath}')
-
         for i in currentPath:
             if i[0].islower() and i != "start":
                 if i in visited:
@@ -83,7 +69,7 @@ def part2():
                 else:
                     paths.append(newpath)
 
-    print(f'paths are {finalPaths}')
+    ### print(f'paths are {finalPaths}')
     return len(finalPaths)
 
 if __name__ == "__main__":
