@@ -45,41 +45,45 @@ def part1():
 def part2():
     starter = puzzle[0]
     rules = {}
+    combinations = {}
+    counts = {}
     firstletter = starter[0]
     for i in puzzle[2:]:
         k, v = i.split(" -> ")
         rules[k] = v
-    for j in range(40):
-        counts = {}
-        count = 0
-        polymers = []
-        newpolymer = {}
-        for i in starter:
-            newpolymer[count] = i
-            count += 1
-        print("dict", count)
-        for i in range(count-1):
-            pair = newpolymer[i] + newpolymer[i+1]
-            if pair in rules:
-                trio = rules[pair] + newpolymer[i+1]
-            else:
-                trio = newpolymer[i+1]
-            polymers.append(trio)
-        print("pair")
-        starter = firstletter + "".join(polymers)
-        #print(starter, polymers)
+        combinations[k] = 0
 
-        print(j)
-
-
-
-    for letter in starter:
-        if letter not in counts:
-            counts[letter] = 1
+    for i in starter:
+        if i in counts:
+            counts[i] += 1
         else:
-            counts[letter] += 1
+            counts[i] = 1
+
+    for v, w in zip(starter[:-1], starter[1:]):
+        combinations[v+w] += 1
+
+    for j in range(40):
+        changes = []
+        for i in combinations.keys():
+            if combinations[i] > 0:
+                firstletter, secondletter, middleletter = i[0], i[1], rules[i]
+                # using "changes" to avoid changing the list as we iterate over it
+                changes.append((firstletter + middleletter, combinations[i]))
+                changes.append((middleletter + secondletter,  combinations[i]))
+                changes.append((firstletter + secondletter, -combinations[i]))
+
+        # add changes to the combinations dictionary and update counts
+        for k, v in changes:
+            # counts only update on the changes where a letter is added, which also removes a combination
+            if v < 0 and rules[k] in counts:
+                counts[rules[k]] -= v
+            elif v < 0 and rules[k] not in counts:
+                counts[rules[k]] = -v
+            combinations[k] += v
+
+
     bestcount = 0
-    worstcount = 100000000
+    worstcount = 24998671673256760416
     bestletter, worstletter = 0, 0
     for i in counts.keys():
         if counts[i] > bestcount:
@@ -88,7 +92,7 @@ def part2():
         elif counts[i] < worstcount:
             worstcount = counts[i]
             worstletter = i
-    print(bestcount, bestletter, worstcount, worstletter, starter)
+    #print(bestcount, bestletter, worstcount, worstletter)
     return bestcount - worstcount
 
 
